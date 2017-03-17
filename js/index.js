@@ -10,7 +10,25 @@ var App = {
     }
 };
 
-(function (App) {
+
+function sortByCreateDate() {
+    var sortedTasks = TaskFactory.sortTask(sortByCreatedDateCallback);
+    MainApp.updateList(sortedTasks)
+}
+
+function sortByCreatedDateCallback(taskA, taskB) {
+    return (new Date(taskA.createdDate)).getDate() - (new Date(taskB.createDate)).getDate();
+}
+
+function sortByDueDate() {
+    var sortedTasks = TaskFactory.sortTask(sortByDueDateCallback);
+    MainApp.updateList(sortedTasks)
+}
+function sortByDueDateCallback(taskA, taskB) {
+    return (new Date(taskA.dueDate)).getDate() - (new Date(taskB.dueDate)).getDate();
+}
+
+var MainApp = (function (App) {
 
     $('#submit').click(function (e) {
         e.preventDefault();
@@ -43,8 +61,9 @@ var App = {
 
     }
 
-    function updateList() {
-        var tasks = TaskFactory.getAllTask();
+    function updateList(tasks) {
+        tasks = tasks || TaskFactory.getAllTask();
+        //var tasks = TaskFactory.getAllTask();
         $('#allTasks > tbody:last-child').empty();
         tasks.forEach(function (elem) {
             var newRow = '<tr>' +
@@ -64,24 +83,10 @@ var App = {
             $('#allTasks > tbody:last-child').append(newRow);
         })
     }
-
-    function sortByCreateDate() {
-        TaskFactory.sortTask(sortByCreatedDateCallback);
-    }
-
-    //function sortByCreatedDate(taskA, taskB) {
-    //    return toDate(taskA.createdDate).getDate() - toDate(taskB.createDate).getDate();
-    //}
-    //
-    //function sortByDueDate(taskA, taskB) {
-    //    return toDate(taskA.dueDate).getDate() - toDate(taskB.dueDate).getDate();
-    //}
-    //
-    //
-    //
-    //function toDate(date) {
-    //    return new Date(date);
-    //}
     updateList();
+
+    return {
+        updateList:updateList
+    }
 
 }(App));
