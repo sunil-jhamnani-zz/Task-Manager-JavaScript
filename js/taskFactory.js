@@ -12,7 +12,7 @@ var TaskFactory = (function () {
             localStorage.setItem("tasks", JSON.stringify(tasks));
         },
         getAllTask: function () {
-            tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks = JSON.parse(localStorage.getItem("tasks")) || tasks;
             return tasks;
         },
         markAsComplete: function (id) {
@@ -20,7 +20,6 @@ var TaskFactory = (function () {
             var result = $.grep(tasks, function(e){ return e.id == id; });
             result[0].isCompeleted = true;
             localStorage.setItem("tasks", JSON.stringify(tasks));
-
         },
         sortTask: function (callback) {
             return tasks.sort(callback);
