@@ -1,3 +1,57 @@
+body {
+    font-family: "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+header {
+    background: #0275d8;
+    color: white;
+}
 section {
+    width: 100%;
+    display: inline-block;
+}
+
+.addTask {
     margin-top: 50px;
+}
+
+.navbar-header {
+    font-size: 3em;
+}
+
+/*tr {*/
+    /*background: #0275d8;*/
+/*}*/
+
+td {
+    vertical-align: baseline !important;
+}
+
+thead {
+    cursor: pointer;
+}
+button {
+    cursor: pointer;
+}
+#allTasks {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+    color: white;
+}
+.completed {
+    background-color: #5cb85c ;
+}
+
+.pending {
+    background-color: #0275d8;
+}
+
+.delete {
+    background: transparent;
+    color: white;
+}
+
+.delete:hover {
+    background-color: red;
 }

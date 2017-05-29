@@ -15,11 +15,13 @@ var TaskFactory = (function () {
             tasks = JSON.parse(localStorage.getItem("tasks")) || tasks;
             return tasks;
         },
-        markAsComplete: function (id) {
+        updateProgress: function (id) {
             tasks = this.getAllTask();
             var result = $.grep(tasks, function(e){ return e.id == id; });
-            result[0].isCompeleted = true;
+            result[0].isCompeleted = !result[0].isCompeleted;
             localStorage.setItem("tasks", JSON.stringify(tasks));
+            return result[0].isCompeleted;
+
         },
         sortTask: function (callback) {
             return tasks.sort(callback);
@@ -29,7 +31,6 @@ var TaskFactory = (function () {
             var index = tasks.findIndex(function(e){ return e.id == id; });
             tasks.splice(index, 1);
             localStorage.setItem("tasks", JSON.stringify(tasks));
-            location.reload();
         },
         getStatus: function(status) {
             switch (status) {
